@@ -18,39 +18,58 @@
     </style>
 </head>
 <body>
-    <div class='tableauPlaceholder' id='viz1706533196244'>
-        <noscript>
-            <a href='#'><img alt='ДашОснова (2)' src='https://public.tableau.com/static/images/29/29_01_17065331595530/2/1_rss.png' style='border: none' /></a>
-        </noscript>
-        <object class='tableauViz' style='display:none;'>
-            <param name='host_url' value='https%3A%2F%2Fpublic.tableau.com%2F' />
-            <param name='embed_code_version' value='3' />
-            <param name='site_root' value='' />
-            <param name='name' value='29_01_17065331595530/2' />
-            <param name='tabs' value='no' />
-            <param name='toolbar' value='yes' />
-            <param name='static_image' value='https://public.tableau.com/static/images/29/29_01_17065331595530/2/1.png' />
-            <param name='animate_transition' value='yes' />
-            <param name='display_static_image' value='yes' />
-            <param name='display_spinner' value='yes' />
-            <param name='display_overlay' value='yes' />
-            <param name='display_count' value='yes' />
-            <param name='language' value='en-US' />
-            <param name='filter' value='publish=yes' />
-        </object>
-    </div>
+    <div class='tableauPlaceholder' id='viz1706533196244'></div>
     <script type='text/javascript'>
-        var divElement = document.getElementById('viz1706533196244');
-        var vizElement = divElement.getElementsByTagName('object')[0];
-        function resizeViz() {
-            vizElement.style.width = window.innerWidth + 'px';
-            vizElement.style.height = window.innerHeight + 'px';
+        function isTouchDevice() {
+            return (('ontouchstart' in window) || (navigator.maxTouchPoints > 0) || (navigator.msMaxTouchPoints > 0));
         }
-        window.onresize = resizeViz;
-        resizeViz(); // вызываем функцию при первой загрузке страницы
-        var scriptElement = document.createElement('script');
-        scriptElement.src = 'https://public.tableau.com/javascripts/api/viz_v1.js';
-        vizElement.parentNode.insertBefore(scriptElement, vizElement);
+
+        function initTableauViz() {
+            var placeholderDiv = document.getElementById('viz1706533196244');
+            var url = 'https://public.tableau.com/views/29_01_17065331595530/2';
+
+            if (isTouchDevice()) {
+                url += '?:mobile=yes';
+            }
+
+            var vizElement = document.createElement('object');
+            vizElement.className = 'tableauViz';
+            vizElement.style.width = '100%';
+            vizElement.style.height = '100%';
+            vizElement.setAttribute('data', url);
+            placeholderDiv.appendChild(vizElement);
+
+            var params = [
+                { name: 'host_url', value: 'https%3A%2F%2Fpublic.tableau.com%2F' },
+                { name: 'embed_code_version', value: '3' },
+                { name: 'site_root', value: '' },
+                { name: 'name', value: '29_01_17065331595530/2' },
+                { name: 'tabs', value: 'no' },
+                { name: 'toolbar', value: 'yes' },
+                { name: 'static_image', value: 'https://public.tableau.com/static/images/29/29_01_17065331595530/2/1.png' },
+                { name: 'animate_transition', value: 'yes' },
+                { name: 'display_static_image', value: 'yes' },
+                { name: 'display_spinner', value: 'yes' },
+                { name: 'display_overlay', value: 'yes' },
+                { name: 'display_count', value: 'yes' },
+                { name: 'language', value: 'en-US' },
+                { name: 'filter', value: 'publish=yes' }
+            ];
+
+            params.forEach(function(param) {
+                var paramElement = document.createElement('param');
+                paramElement.name = param.name;
+                paramElement.value = param.value;
+                vizElement.appendChild(paramElement);
+            });
+
+            // Добавляем скрипт для Tableau API
+            var scriptElement = document.createElement('script');
+            scriptElement.src = 'https://public.tableau.com/javascripts/api/viz_v1.js';
+            document.body.appendChild(scriptElement);
+        }
+
+        window.onload = initTableauViz;
     </script>
 </body>
 </html>
